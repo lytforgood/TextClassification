@@ -8,11 +8,11 @@
 
 03fastText_keras.py fastText keras实现
 
-04.textCNN.py word2vecter做词向量的CNN两种模型 
+04textCNN.py word2vecter做词向量的CNN两种模型 
 
-05.textRNN.py 双向lstm随机初始词向量
+05textRNN.py 双向lstm随机初始词向量
 
-06.textRCNN.py Recurrent Convolutional Neural Networks for Text Classification
+06textRCNN.py Recurrent Convolutional Neural Networks for Text Classification
 
-07.Attention.py 分层注意网络   HAN模型 暂未完成
+07Attention.py 双向LSTM+Attention分层注意网络   HAN模型 
 

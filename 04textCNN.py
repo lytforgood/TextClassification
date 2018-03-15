@@ -5,14 +5,14 @@
 论文：Convolutional Neural Networks for Sentence Classification
 论文解读：http://www.jeyzhang.com/cnn-apply-on-modelling-sentence.html
 输入层：词个数x词向量维数---矩阵的类型可以是静态的(static)word vector是固定不变，动态的(non static)word vector也当做是可优化的参数这一过程称为Fine tune
-卷积层：若干个Feature Map--不同大小滤波器
+卷积层：若干个Feature Map--不同大小滤波器 卷积核大小为nxk k是词向量维度 1D默认宽度为词向量维度
 池化层：Max-over-time Pooling--输出为各个Feature Map的最大值们，即一个一维的向量
 全连接 + Softmax层：池化层的一维向量的输出通过全连接的方式，连接一个Softmax层
 Dropout：倒数第二层的全连接部分，L2正则化，减轻过拟合
 词向量变种：
 CNN-rand：对不同单词的向量作随机初始化，BP的时候作调整  Embedding层选择随机初始化方法
 static：拿word2vec, FastText or GloVe训练好的词向量
-non-static：拿word2vec, FastText or GloVe训练好的词向量，训练过程中再对它们微调Fine tuned
+non-static：拿word2vec, FastText or GloVe训练好的词向量，训练过程中再对它们微调Fine tuned(自己理解：先用其他大文本语料训练w2v再用本文本训练w2v)
 multiple channel ：类比于图像中的RGB通道, 这里也可以用 static 与 non-static 搭两个通道来搞
 结论：
 CNN-static较与CNN-rand好，说明pre-training的word vector确实有较大的提升作用（这也难怪，因为pre-training的word vector显然利用了更大规模的文本数据信息）；
@@ -25,15 +25,13 @@ glove embedding参考http://blog.csdn.net/sscssz/article/details/53333225
 """
 from __future__ import print_function
 
-from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
-from keras.utils.np_utils import to_categorical
 from keras.layers import Dense, Input, Flatten,GlobalMaxPooling1D
 from keras.layers import Conv1D, MaxPooling1D, Embedding,Dropout
 from keras.models import Model
 from keras.optimizers import *
 from keras.models import Sequential
-from keras.layers import Merge
+from keras.layers import merge
 import pandas as pd
 import cPickle as pickle
 import numpy as np
@@ -134,13 +132,13 @@ print('Build model...')
 #           epochs=epochs,
 #           validation_data=(x_test, y_test))
 
-###3层合并model
+###3层合并model 经过词向量表达的文本为一维数据，因此在TextCNN卷积用的是一维卷积
 #left model
 model_left = Sequential()
 #https://keras.io/layers/embeddings/
 # model.add(Embedding(max_features,embedding_dims,input_length=maxlen))
 model_left.add(embedding_layer)
-model_left.add(Conv1D(128, 5, activation='relu'))
+model_left.add(Conv1D(128, 5, activation='relu')) #128输出的维度 5卷积核大小
 model_left.add(MaxPooling1D())#5
 model_left.add(Conv1D(128, 5, activation='relu'))
 model_left.add(MaxPooling1D())#5

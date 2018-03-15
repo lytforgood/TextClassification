@@ -16,7 +16,6 @@ import pandas as pd
 import cPickle as pickle
 import numpy as np
 import gensim
-import string
 from keras.preprocessing import sequence
 from keras import backend
 from keras.layers import Dense, Input, Lambda, LSTM, TimeDistributed
