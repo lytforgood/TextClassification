@@ -4,7 +4,7 @@
 文本分类之textCNN  疑问MaxPooling1D？使用计算？区别和GlobalMaxPooling1D
 论文：Convolutional Neural Networks for Sentence Classification
 论文解读：http://www.jeyzhang.com/cnn-apply-on-modelling-sentence.html
-输入层：词个数x词向量维数---矩阵的类型可以是静态的(static)word vector是固定不变，动态的(non static)word vector也当做是可优化的参数这一过程称为Fine tune
+输入层：词个数x词向量维数---矩阵的类型可以是静态的(static)word vector是固定不变，动态的(non static)word vector也当做是可优化的参数这一过程称为 Fine tune
 卷积层：若干个Feature Map--不同大小滤波器 卷积核大小为nxk k是词向量维度 1D默认宽度为词向量维度
 池化层：Max-over-time Pooling--输出为各个Feature Map的最大值们，即一个一维的向量
 全连接 + Softmax层：池化层的一维向量的输出通过全连接的方式，连接一个Softmax层

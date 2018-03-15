@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-使用Word2vector定义词向量矩阵
+使用Word2vec定义词向量矩阵
 recurrent structure (convolutional layer)：
 词向量矩阵
 left(无意义补0+去最后一个词)  max_token对应词向量为0向量
@@ -91,7 +91,6 @@ for word, i in word_to_id.items():
         # words not found in embedding index will be all-zeros.
         embedding_matrix[i] = embedding_vector # word_index to word_embedding_vector ,<20000(max_token)
 
-
 print('Build model...')
 document = Input(shape = (None, ), dtype = "int32")
 left_context = Input(shape = (None, ), dtype = "int32")
@@ -131,7 +130,6 @@ doc_x_test = np.array(x_test)
 left_x_test = np.array([[max_token]+t_one[:-1].tolist() for t_one in x_test])
 # We shift the document to the left to obtain the right-side contexts.
 right_x_test = np.array([t_one[1:].tolist()+[max_token] for t_one in x_test])
-
 
 
 # history = model.fit([doc_x_train, left_x_train, right_x_train], y_train, epochs = 1)

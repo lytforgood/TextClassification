@@ -14,5 +14,5 @@
 
 06textRCNN.py Recurrent Convolutional Neural Networks for Text Classification
 
-07Attention.py 双向LSTM+Attention分层注意网络   HAN模型 
+07Attention.py 双向LSTM+Attention分层注意网络 -HAN模型 
 

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 1、自定义模型 Conv-BiGRU 卷积和循环并行
-2、自定义模型   卷积和循环串行
+2、自定义模型 卷积和循环串行
 """
 from keras.preprocessing import sequence
 from keras.layers import Dense, Input, Flatten,Permute,Reshape
