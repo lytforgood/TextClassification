@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-lstm 之后加 + Attention   HAN模型
+单双向lstm 之后加 + Attention   HAN模型
 paper:Hierarchical Attention Networks for Document Classification
 加入Attention之后最大的好处自然是能够直观的解释各个句子和词对分类类别的重要性
 Structure:
