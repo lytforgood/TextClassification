@@ -42,14 +42,14 @@ sys.setdefaultencoding('utf-8')
 
 ##读取文件
 d = pd.read_csv("./data/nlpmail.csv",sep=',',header=None,encoding="utf-8")
-d.columns = ['title','label']
+d.columns = ['title','lable']
 ##类别编码
 def label2num(x):
   l=0
   if(x==u"垃圾箱(系统判断)"):
     l=1
   return l
-d["label2"]=[label2num(x) for x in d["label"]]
+d["lable2"]=[label2num(x) for x in d["lable"]]
 d["index"]=range(d.shape[0])
 
 
@@ -136,8 +136,10 @@ def replayxx(line):
     return res
 d["title"]=[replayxx(x) for x in d["title"]]
 
-d=d[["title","label2"]].reset_index(drop = True)
+d=d[["title","lable2"]].reset_index(drop = True)
 d.columns=['title','lable']
+
+# d["title"]=[x.encode("utf-8") for x in d["title"]]
 
 path='./data/nlpmaildata2.pkl'
 output = file(path, 'wb')
@@ -145,7 +147,7 @@ pickle.dump(d, output, True)
 output.close()
 
 d = shuffle(d)
-d.to_csv("./data/nlpmail_re.csv",header=False,index=False,encoding="utf-8") #(452526, 2)
+d.to_csv("./data/nlpmail_re.csv",header=False,index=False,encoding="utf_8_sig") #(452526, 2)
 #切分数据集
 df1=d[(d["lable"]==1)].sample(frac=0.2)
 df2=d[(d["lable"]==0)].sample(frac=0.2)
@@ -158,4 +160,4 @@ output = file(path, 'wb')
 pickle.dump(d, output, True)
 output.close()
 
-d.to_csv("./data/nlpmaildatasample2.csv",header=False,index=False)
+d.to_csv("./data/nlpmaildatasample2.csv",header=False,index=False,encoding="utf_8_sig")
