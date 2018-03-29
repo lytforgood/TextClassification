@@ -10,7 +10,7 @@ import re
 import jieba
 import cPickle as pickle
 import sys #这里只是一个对sys的引用，只能reload才能进行重新加载
-
+from sklearn.utils import shuffle
 
 def data2all():
     ##数据生成
@@ -78,17 +78,39 @@ def createVocabList(dataSet):
         all_data.append(words)
     all_data=set(all_data)
     return all_data
+
+#去除空值
+d=d.dropna()
 #去标点
 d["title"]=[remove_punctuation(x) for x in d["title"]]
 d=d[["index","title","label2"]]
+
+#替换特殊空格
+def replaySspace(line):
+    line=line.replace('\xc2\xa0', '')
+    return line
+
+
+d["title"]=[replaySspace(x) for x in d["title"]]
+
+##去掉全英文和字母
+def  rematch(line):
+    if re.match('^[A-Za-z0-9]+$',line):
+        line="q100"
+    return line
+
+d["title"]=[rematch(x) for x in d["title"]]
+
+d=d[d["title"]!="q100"]
+
 #分词
 d["title"]=[cutline(x) for x in d["title"]]
 
 ##保存文本
-path='./data/nlpmaildata.pkl'
-output = file(path, 'wb')
-pickle.dump(d, output, True)
-output.close()
+# path='./data/nlpmaildata.pkl'
+# output = file(path, 'wb')
+# pickle.dump(d, output, True)
+# output.close()
 # ##保存字典
 # vocab_dir=createVocabList(d["title"])
 # vocab_dir=list(vocab_dir)
@@ -96,6 +118,7 @@ output.close()
 # output = file(path, 'wb')
 # pickle.dump(vocab_dir, output, True)
 # output.close()
+
 
 #数据清洗 替换英文和字母 选取文本长度>4的文本
 def replayxx(line):
@@ -120,9 +143,12 @@ path='./data/nlpmaildata2.pkl'
 output = file(path, 'wb')
 pickle.dump(d, output, True)
 output.close()
+
+d = shuffle(d)
+d.to_csv("./data/nlpmail_re.csv",header=False,index=False,encoding="utf-8") #(452526, 2)
 #切分数据集
-df1=d[(d["label2"]==1)].sample(frac=0.2)
-df2=d[(d["label2"]==0)].sample(frac=0.2)
+df1=d[(d["lable"]==1)].sample(frac=0.2)
+df2=d[(d["lable"]==0)].sample(frac=0.2)
 d=pd.concat([df1,df2])
 from sklearn.utils import shuffle
 d = shuffle(d)
