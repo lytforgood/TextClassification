@@ -164,7 +164,7 @@ lstm_out_b_rnn = backward_rnn(embedded_sequences)
 attention_b_mul = attention_3d_block2(lstm_out_b_rnn,"backward")
 attention_mul=merge([attention_f_mul, attention_b_mul], mode='concat', concat_axis=-1)
 attention_mul = Flatten()(attention_mul)
-output = Dense(1, activation='sigmoid')(attention_mul)
+output = Dense(1, activation='softmax')(attention_mul)
 model = Model(sentence_input, output)
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 model.fit(x_train, y_train, validation_data=(x_test, y_test),
