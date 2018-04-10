@@ -95,7 +95,7 @@ model_left.add(Bidirectional(GRU(128)))
 
 model_right = Sequential()
 model_right.add(embedding_layer)
-model_right.add(Conv1D(128, 5, activation='relu')) #128输出的维度 5卷积核大小
+model_right.add(Conv1D(128, 5, activation='relu')) #128卷积核的个数 5卷积核大小
 model_right.add(MaxPooling1D())#5
 model_right.add(Conv1D(128, 1, activation='relu'))
 model_right.add(MaxPooling1D())#5
