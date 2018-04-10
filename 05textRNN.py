@@ -63,7 +63,7 @@ model = Sequential()
 model.add(Embedding(max_features, embedding_dims, input_length=maxlen))
 model.add(Bidirectional(LSTM(64))) ### 输出维度64 GRU
 model.add(Dropout(0.5))
-model.add(Dense(1, activation='sigmoid'))
+model.add(Dense(1, activation='softmax'))
 # try using different optimizers and different optimizer configs
 model.compile('adam', 'binary_crossentropy', metrics=['accuracy'])
 #lstm常选参数model.add(LSTM(128, dropout=0.2, recurrent_dropout=0.2))
