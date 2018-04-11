@@ -106,7 +106,7 @@ model = Sequential()
 model.add(merged) # add merge
 model.add(Dense(128, activation='relu')) # 全连接层
 model.add(Dropout(0.2))
-model.add(Dense(1, activation='softmax')) # softmax，输出文本属于类别中每个类别的概率
+model.add(Dense(1, activation='sigmoid')) #
 
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
@@ -124,7 +124,7 @@ maxpool_1=MaxPooling1D()(conv_1)
 drop_1 = Dropout(0.2)(maxpool_1)
 biGRU=Bidirectional(GRU(128))(drop_1)
 drop_2 = Dropout(0.5)(biGRU)
-dense_1 = Dense(1, activation='relu')(drop_2)
+dense_1 = Dense(1, activation='sigmoid')(drop_2)
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
