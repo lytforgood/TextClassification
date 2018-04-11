@@ -171,7 +171,7 @@ model = Sequential()
 model.add(merged) # add merge
 model.add(Dense(128, activation='relu')) # 全连接层
 model.add(Dropout(0.2))
-model.add(Dense(1, activation='softmax')) # softmax，输出文本属于类别中每个类别的概率
+model.add(Dense(1, activation='sigmoid')) # softmax对应多分类 需要修改loss，输出文本属于类别中每个类别的概率
 
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
