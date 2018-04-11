@@ -4,19 +4,13 @@
 
 > 模型参数未经过合适调整，目前正在实验修改验证模型当中，修改完成会更新项目
 
-01mail.py 文本数据生成-输出文本 词典 非一次执行
-
-02mail.py 文本词袋向量化/TF-IDF标准化/文本Hash+朴素贝叶斯
-
-03fastText.py fastText库训练
-
-03fastText_keras.py fastText keras实现
-
-04textCNN.py word2vecter做词向量的CNN两种模型 
-
-05textRNN.py 双向lstm随机初始词向量
-
-06textRCNN.py Recurrent Convolutional Neural Networks for Text Classification
-
-07Attention.py 双向LSTM+Attention分层注意网络 -HAN模型 
-
+- py2 详见py2目录下说明
+- main_control.py 主程序入口
+- dataPreprocess.py 数据处理 数据输入为：句子中的词(空格分开),标签
+- word2vec.py 训练word2vec模型
+- FastText.py fastText keras实现
+- TextCNNmodel.py word2vecter做词向量的CNN模型 
+- TextRNNmodel.py SimpleRNN 双向lstm GRU
+- TextRCNNmodel.py Recurrent Convolutional Neural Networks for Text Classification
+- TextAttention.py 双向LSTM+Attention分层注意网络 -HAN模型 (与论文有区别)
+- MyModel.py 并行卷积和双向GRU

@@ -7,23 +7,18 @@ pip install gensim
 """
 from gensim.models import Word2Vec
 import pandas as pd
-# import cPickle as pickle
-# path='./data/nlpmaildata2.pkl'
-# f2 = file(path, 'rb')
-# d = pickle.load(f2)
-# f2.close()
-
-path='./data/nlpmail_re3.txt'
-d = pd.read_csv(path,header=None)
-d.columns=['title','lable']
-# sentences= [str(s).split() for s in sentences]
+import cPickle as pickle
+path='./data/nlpmaildata2.pkl'
+f2 = file(path, 'rb')
+d = pickle.load(f2)
+f2.close()
 
 
 modelpath="./data/w2c_model"
 sentences=list(d["title"])
-sentences= [str(s).split() for s in sentences]
+sentences= [s.decode("utf-8").encode('utf-8').split() for s in sentences]
 
-model = Word2Vec(sentences, sg=1, size=128,  window=5,  min_count=1,  negative=3, sample=0.001, hs=1, workers=4)
+model = Word2Vec(sentences, sg=1, size=64,  window=5,  min_count=1,  negative=3, sample=0.001, hs=1, workers=4)
 # 1.sg=1是skip-gram算法，对低频词敏感；默认sg=0为CBOW算法。
 # 2.size是输出词向量的维数，值太小会导致词映射因为冲突而影响结果，值太大则会耗内存并使算法计算变慢，一般值取为100到200之间。
 # 3.window是句子中当前词与目标词之间的最大距离，3表示在目标词前看3-b个词，后面看b个词（b在0-3之间随机）。
