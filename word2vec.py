@@ -4,6 +4,8 @@
 gensim的Word2vector使用
 pip install gensim
 输入数据要求是：分词后数据，以空格为单词的分隔符
+原理讲解
+https://www.cnblogs.com/f-young/p/7906451.html
 """
 from gensim.models import Word2Vec
 import pandas as pd
@@ -29,6 +31,7 @@ model = Word2Vec(sentences, sg=1, size=128,  window=5,  min_count=1,  negative=3
 # 3.window是句子中当前词与目标词之间的最大距离，3表示在目标词前看3-b个词，后面看b个词（b在0-3之间随机）。
 # 4.min_count是对词进行过滤，频率小于min-count的单词则会被忽视，默认值为5。
 # 5.negative和sample可根据训练结果进行微调，sample表示更高频率的词被随机下采样到所设置的阈值，默认值为1e-3。
+#作者在论文中说到，当样本量比较小的时候，选择5-20个negative words效果会比较好，当样本量比较大的时候，2-5个negative words就能得到很好的效果
 # 6.hs=1表示层级softmax将会被使用，默认hs=0且negative不为0，则负采样将会被选择使用。
 # 7.workers控制训练的并行，此参数只有在安装了Cpython后才有效，否则只能使用单核。
 # model["英文"]
